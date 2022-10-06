@@ -4,11 +4,17 @@ from django.utils import timezone
 class Categoria(models.Model):
     nome = models.CharField(max_length=255)
 
+    def __str__(self) -> str: # representando objetos pelo nome(no site)
+        return self.nome
+
 class Contato(models.Model):
-    nome = models.CharField(max_length=255)
-    sobrenome = models.CharField(max_length=255, blank=True)
-    telefone = models.CharField(max_length=255)
-    email = models.CharField(max_length=255, blank=True)
-    data_criacao = models.DateTimeField(default=timezone.now)
-    descricao =models.TextField(blank=True)
-    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
+    nome = models.CharField(max_length=255) # adicionando campo nome
+    sobrenome = models.CharField(max_length=255, blank=True) # adicionando campo sobrenome
+    telefone = models.CharField(max_length=255) # adicionando campo telefone
+    email = models.CharField(max_length=255, blank=True) # adicionando campo email
+    data_criacao = models.DateTimeField(default=timezone.now) # adicionando campo data da criação
+    descricao =models.TextField(blank=True) # adicionando campo descrição
+    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING) # # adicionando categoria a ser selecionada
+
+    def __str__(self) -> str: # representando objetos pelo nome(no site)
+        return self.nome
