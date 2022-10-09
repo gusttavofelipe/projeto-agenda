@@ -14,30 +14,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>
-        <a href="#"> ###### </a>
-      </td>
-      <td>######</td>
-      <td>######</td>
-      <td>Amigos</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#"> ######</a>
-      </td>
-      <td>######</td>
-      <td>######</td>
-      <td>Família</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#"> ######</a>
-      </td>
-      <td>######</td>
-      <td>######</td>
-      <td>Conhecidos</td>
-    </tr>
+    <!--fazendo for nas informações para a tabela-->
+    {% for contato in contatos %} 
+      <tr>        
+        <td>
+           <a href="#"> {{ contato.nome }} </a> 
+        </td>      
+        <td>{{ contato.sobrenome }}</td>
+        <td>{{ contato.telefone }}</td>
+        <td>{{ contato.categoria }}</td>
+      </tr>
+    {% endfor %}
   </tbody>
 </table>
 
