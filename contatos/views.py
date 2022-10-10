@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Contato
 
 def index(request):
@@ -8,7 +8,7 @@ def index(request):
     })
 
 def detalhes(request, contato_id): 
-    detalhes = Contato.objects.get(id=contato_id) # id recebido como paramentro no link do index
-    return render(request, 'contatos/detalhes.html', { # pagina de detalhes dos contatos
+    detalhes = get_object_or_404(Contato, id=contato_id) # levantando erro 404
+    return render(request, 'contatos/detalhes.html', { 
         'detalhe': detalhes
     })
