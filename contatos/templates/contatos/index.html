@@ -16,6 +16,7 @@
   <tbody>
     <!--fazendo for nas informações para a tabela-->
     {% for contato in contatos %} 
+      {% if contato.mostrar %} <!--habilita a visualização ou não-->
       <tr>        
         <td>
            <a href="{% url 'detalhes' contato.id %}"> {{ contato.nome }} </a> 
@@ -24,6 +25,7 @@
         <td>{{ contato.telefone }}</td>
         <td>{{ contato.categoria }}</td>
       </tr>
+      {% endif %}
     {% endfor %}
   </tbody>
 </table>
