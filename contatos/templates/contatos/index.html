@@ -30,4 +30,25 @@
   </tbody>
 </table>
 
+<!--PAGINADOR-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+  {% for pagina in contatos.paginator.page_range %} <!--pegando numero da pagina-->
+    {% if contatos.number == pagina %}  <!--condicional pra active-->    
+      <li class="page-item active">
+        <a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a>  <!--indicando paginas-->
+      </li>
+
+    {% else %}
+      <li class="page-item">
+        <a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+
+  </ul>
+</nav>
+
+
 {% endblock conteudo %}
