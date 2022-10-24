@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models.functions import Concat
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from contatos.models import Contato
+from django.contrib import messages
 from django.http import Http404
 
-def index(request):            # ordenando por id decrescente
+def index(request):    
     contatos = Contato.objects.order_by('-id').filter(
         mostrar=True # filtrando pela variavel quando for verdadeira
     )
@@ -30,11 +31,16 @@ def detalhes(request, contato_id):
 
 
 def busca(request):
+
     termo = request.GET.get('termo')
     campos = Concat('nome', Value(' '), 'sobrenome') # Value simula um campo no db
 
-    if termo is None:
-        raise Http404() 
+    # exibindo mensagem sobre termo vazio
+    if not termo or termo is None:
+        messages.add_message(request, messages.ERROR,
+         'O termo não pode ser enviado vazio.')
+         
+        return redirect('index')
 
     contatos = Contato.objects.annotate(
         nome_completo=campos).filter(

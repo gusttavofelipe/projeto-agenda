@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from xml.etree.ElementInclude import default_loader
 from django.db import models
 from django.utils import timezone
@@ -17,6 +18,7 @@ class Contato(models.Model):
     descricao =models.TextField(blank=True) # adicionando campo descrição
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING) # adicionando categoria a ser selecionada
     mostrar = models.BooleanField(default=True) # campo de alteraração de visualização de um contato
+    foto = models.ImageField(blank=True, upload_to='fotos/%Y/%m/%d')
 
     def __str__(self) -> str: # representando objetos pelo nome(no site)
         return self.nome
