@@ -8,22 +8,22 @@
         {% csrf_token %}
     <div class="form-group">
         <label>Nome</label>
-        <input type="text" name="nome" class="form-control" placeholder="Ex: André">
+        <input type="text" name="nome" value="{{ request.POST.nome }}" class="form-control" placeholder="Ex: André">
     </div>
 
     <div class="form-group">
         <label>Sobrenome</label>
-        <input type="text" name="sobrenome" class="form-control" placeholder="Ex: Carvalho">
+        <input type="text" name="sobrenome" value="{{ request.POST.sobrenome }}" class="form-control" placeholder="Ex: Carvalho">
     </div>
 
     <div class="form-group">
       <label>E-mail</label>
-      <input type="email" name="email" class="form-control" placeholder="seuemail@gmail.com">
+      <input type="email" name="email" value="{{ request.POST.email }}"  class="form-control" placeholder="seuemail@gmail.com">
     </div>
 
     <div class="form-group">
         <label>Usuário</label>
-        <input type="text" name="usuario" class="form-control" placeholder="Ex: andrecarvalho123">
+        <input type="text" name="usuario" value="{{ request.POST.usuario }}" class="form-control" placeholder="Ex: andrecarvalho123">
     </div>
 
     <div class="form-group">
@@ -34,6 +34,7 @@
     <div class="form-group">
         <label>Confirme a senha</label>
         <input type="password" name="senha2" class="form-control">
+        <small id="emailHelp" class="form-text text-muted">Insira os mesmos caracteres do campo senha</small>
     </div>
 
     <button type="submit" class="btn btn-primary">Cadastrar</button>
