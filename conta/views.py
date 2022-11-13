@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.contrib.auth.decorators import login_required
+from .models import FormContato
 
 def login(request):
     if request.method != 'POST':
@@ -80,6 +81,23 @@ def cadastro(request):
 
 @login_required(redirect_field_name='login/') 
 def dashboard(request):
-    return render(request, 'conta/dashboard.html')
+    if request.method != 'POST':
+        form = FormContato
+        return render(request, 'conta/dashboard.html', {'form': form})
+    form = FormContato(request.POST, request.FILES)
 
+    if not form.is_valid():
+        messages.error(request, 'Erro ao enviar formulário.')
+        form = FormContato(request.POST)
+        return render(request, 'conta/dashboard.html', {'form': form})
 
+    descricao = request.POST.get('descricao')
+
+    if len(descricao) < 5:
+        messages.error(request, 'Descrição deve ter mais de 5 caracteres')
+        form = FormContato(request.POST)
+        return render(request, 'conta/dashboard.html', {'form': form})
+
+    form.save()
+    messages.success(request, f'Contato {request.POST.get("nome")} salvo com suscesso.!')
+    return redirect('dashboard')

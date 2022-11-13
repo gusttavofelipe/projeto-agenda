@@ -3,7 +3,22 @@
 
 
 {% block conteudo %}
-<h1 class="mt-4 mb-4">Olá, {{ user.first_name }} {{ user.last_name }}</h1>
+<h1 class="mt-4 mb-4">Olá, {{ user.first_name }}</h1>
 {% include 'parciais/_mensagens.html' %}
+<h5>Seu nome de usuário é {{ user }}</h5>
+<br>
+<hr>
+<div class="container"> 
+    <form action=" {% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}    
+        <table> 
+            {{ form }} <!-- formulario do model-->
+            <tr>  
+                <td colspan="2">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </td>
+            </tr>
+        </table>
+</div>
 
 {% endblock %}
